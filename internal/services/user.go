@@ -17,10 +17,10 @@ func (s *UserService) GetUserBalance(id int) (int, error) {
 }
 
 func (s *UserService) AddCashToUser(userId, cost int) error {
-	if _, err := s.userRepo.GetUser(userId); err != nil {
-		return s.userRepo.AddCashToUserWithUpdate(userId, cost)
+	if _, err := s.userRepo.CheckUser(userId); err != nil {
+		return s.userRepo.AddCashToUser(userId, cost)
 	}
-	return s.userRepo.AddCashToUser(userId, cost)
+	return s.userRepo.AddCashToUserWithUpdate(userId, cost)
 }
 
 func (s *UserService) ReserveCash(userId, orderId, serviceId, cost int, serviceName, description string) error {

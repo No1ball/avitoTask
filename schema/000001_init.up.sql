@@ -33,5 +33,5 @@ CREATE TABLE accounting
     description varchar(255),
     service_date date not null,
     is_completed boolean default false,
-    FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE cascade
+    CONSTRAINT fk_order_id FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE cascade
 );

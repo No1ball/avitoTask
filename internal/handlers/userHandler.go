@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -64,7 +63,6 @@ func (h *Handler) addCashToUser(c *gin.Context) {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	fmt.Println("%d - cost", input.Cost)
 	if err := h.services.User.AddCashToUser(userId, input.Cost); err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

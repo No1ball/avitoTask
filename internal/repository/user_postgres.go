@@ -2,7 +2,6 @@ package repository
 
 import (
 	"fmt"
-	"github.com/No1ball/avitoTask/internal/models"
 	"github.com/jmoiron/sqlx"
 	"time"
 )
@@ -78,11 +77,11 @@ func (r *UserDB) ReserveCash(userId, orderId, serviceId, cost int, serviceName, 
 	return tx.Commit()
 }
 
-func (r *UserDB) GetUser(id int) (models.User, error) {
-	var user models.User
-	query := fmt.Sprintf("select * from %s  where id = $1", userTable)
-	row := r.db.QueryRow(query, id)
-	err := row.Scan(&user)
+func (r *UserDB) CheckUser(id int) (int, error) {
+	var user int
+
+	query := fmt.Sprintf("select id from %s  where id = $1", userTable)
+	err := r.db.Get(&user, query, id)
 	return user, err
 }
 
