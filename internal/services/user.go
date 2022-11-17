@@ -17,7 +17,7 @@ func (s *UserService) GetUserBalance(id int) (int, error) {
 }
 
 func (s *UserService) AddCashToUser(userId, cost int) error {
-	if _, err := s.userRepo.GetUser(userId); err == nil {
+	if _, err := s.userRepo.GetUser(userId); err != nil {
 		return s.userRepo.AddCashToUserWithUpdate(userId, cost)
 	}
 	return s.userRepo.AddCashToUser(userId, cost)
